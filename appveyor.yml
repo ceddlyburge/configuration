@@ -1,9 +1,9 @@
 image: Visual Studio 2017
 environment:
  github_token:
-  secure: MkekX4fNuL+MhfZYwE9xv40NFVl2PrRzIapgQVXoHnZb3aVWrgPKnoJ/PneRrLcL 
+  secure: mNjJVxRBAmSq7216RlrUBH8dk9a7vMSOIYcHu2Gy4hDJd3j7kFoLpZf48mgNAF5B
  code_cov_token:
-    secure: iXZYGk5+JJMkYPYRYhFBRXpG3KN/Q7gkyReh3hZAFYtX1p/885y1ZY6fdD1XzBSU  
+  secure: 78v/a1+Lgm9lCr+fztFdQ7LOeE2317+tLXwA6W3edFWsfIgaZcyfe8WkDy52jSn4
 build_script:
  # install sonarqube runner
  - choco install "msbuild-sonarqube-runner" -y 
@@ -21,9 +21,10 @@ test_script:
  - OpenCover.Console.exe -register:user -target:"nunit3-console.exe" -targetargs:"BuiltDlls\Debug\RES.Configuration.Test.dll" -output:"coverage.xml" -returntargetcode
 after_test:
  # upload the code coverage to codcov.io
- - "SET PATH=C:\\Python34;C:\\Python34\\Scripts;%PATH%"
- - pip install codecov
- - codecov -f "coverage.xml" -t %code_cov_token%
+  - ps: |
+      $env:PATH = 'C:\msys64\usr\bin;' + $env:PATH
+      Invoke-WebRequest -Uri 'https://codecov.io/bash' -OutFile codecov.sh
+      bash codecov.sh -f "coverage.xml" -t %code_cov_token%
 artifacts:
  - path: BuiltDLLs\Debug\*.nupkg 
 notifications:
