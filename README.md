@@ -34,10 +34,9 @@ public class EconomicModelConfiguration, ICurrencyConversionConfiguration, IConc
         configuration.GetEnum<Currency>(MethodBase.GetCurrentMethod());
 
     public double DefaultConcreteCost => 
-        GetDouble(MethodBase.GetCurrentMethod());
+        configuration.GetDouble(MethodBase.GetCurrentMethod());
 }
 ```
-
 More details on motivation and  philosophy in [Taming configuration in C#](https://hackernoon.com/taming-configuration-in-c-a2706b2d4741) blog post.
 
 Nuget package available at https://www.nuget.org/packages/RES.Configuration/
