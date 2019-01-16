@@ -2,7 +2,7 @@
 
 A C# library for strongly typed Configuration with validation
 
-[![Build status](https://ci.appveyor.com/api/projects/status/oujy1v19iwdba8e5?svg=true)](https://ci.appveyor.com/project/RESSoftwareTeam/configuration)
+[![Build status](https://ci.appveyor.com/api/projects/status/oujy1v19iwdba8e5?svg=true)](https://ci.appveyor.com/project/ceddlyburge/configuration)
 
 [![Quality Gate](https://sonarcloud.io/api/badges/gate?key=res.configuration)](https://sonarcloud.io/dashboard?id=res.configuration)
 
