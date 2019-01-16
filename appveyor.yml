@@ -4,17 +4,18 @@ environment:
   secure: mNjJVxRBAmSq7216RlrUBH8dk9a7vMSOIYcHu2Gy4hDJd3j7kFoLpZf48mgNAF5B
  code_cov_token:
   secure: 78v/a1+Lgm9lCr+fztFdQ7LOeE2317+tLXwA6W3edFWsfIgaZcyfe8WkDy52jSn4
+ sonarqube_token: 0MsXuoTI0KBmRhi4DCr2WisIi5HS78kw4l3OP4ro1iBj9AYlGrQRtsLwuU7hMzPP
 build_script:
  # install sonarqube runner
  - choco install "msbuild-sonarqube-runner" -y 
  - choco install opencover -y
  - nuget restore "RES.Configuration.sln" -verbosity quiet
- - ps: if ($env:APPVEYOR_PULL_REQUEST_NUMBER) { SonarQube.Scanner.MSBuild.exe begin /k:"res.configuration"  /d:"sonar.host.url=https://sonarcloud.io" /d:"sonar.organization=res" /d:"sonar.login=a8e51e7eccb2eaa68c5f8d3c50e827ee2a0fa545" /d:sonar.verbose=false /d:"sonar.analysis.mode=preview" /d:"sonar.github.pullRequest=$env:APPVEYOR_PULL_REQUEST_NUMBER" /d:"sonar.github.repository=resgroup/configuration" /d:"sonar.github.oauth=$env:github_token" /d:sonar.cs.opencover.it.reportsPaths=coverage.xml }
- - ps: if (-Not $env:APPVEYOR_PULL_REQUEST_NUMBER) { SonarQube.Scanner.MSBuild.exe begin /k:"res.configuration"  /d:"sonar.host.url=https://sonarcloud.io" /d:"sonar.organization=res" /d:"sonar.login=a8e51e7eccb2eaa68c5f8d3c50e827ee2a0fa545" /d:sonar.verbose=false /d:sonar.cs.opencover.it.reportsPaths=coverage.xml }
- #- SonarQube.Scanner.MSBuild.exe begin /k:"res.configuration"  /d:"sonar.host.url=https://sonarcloud.io" /d:"sonar.organization=res" /d:"sonar.login=a8e51e7eccb2eaa68c5f8d3c50e827ee2a0fa545" /d:sonar.verbose=false
+ - ps: if ($env:APPVEYOR_PULL_REQUEST_NUMBER) { SonarQube.Scanner.MSBuild.exe begin /k:"res.configuration"  /d:"sonar.host.url=https://sonarcloud.io" /d:"sonar.organization=res" /d:"sonar.login=$env:sonarqube_token" /d:sonar.verbose=false /d:"sonar.analysis.mode=preview" /d:"sonar.github.pullRequest=$env:APPVEYOR_PULL_REQUEST_NUMBER" /d:"sonar.github.repository=resgroup/configuration" /d:"sonar.github.oauth=$env:github_token" /d:sonar.cs.opencover.it.reportsPaths=coverage.xml }
+ - ps: if (-Not $env:APPVEYOR_PULL_REQUEST_NUMBER) { SonarQube.Scanner.MSBuild.exe begin /k:"res.configuration"  /d:"sonar.host.url=https://sonarcloud.io" /d:"sonar.organization=res" /d:"sonar.login=$env:sonarqube_token" /d:sonar.verbose=false /d:sonar.cs.opencover.it.reportsPaths=coverage.xml }
+ #- SonarQube.Scanner.MSBuild.exe begin /k:"res.configuration"  /d:"sonar.host.url=https://sonarcloud.io" /d:"sonar.organization=res" /d:"sonar.login=$env:sonarqube_token" /d:sonar.verbose=false
  - msbuild RES.Configuration\RES.Configuration.csproj /t:pack /p:IncludeSymbols=true /nowarn:1125 /verbosity:quiet
  - msbuild RES.Configuration.Test\RES.Configuration.Test.csproj  /nowarn:1125 /verbosity:quiet
- - SonarQube.Scanner.MSBuild.exe end /d:"sonar.login=a8e51e7eccb2eaa68c5f8d3c50e827ee2a0fa545"
+ - SonarQube.Scanner.MSBuild.exe end /d:"sonar.login=$env:sonarqube_token"
 
 test_script:
  # test and create coverage report.
