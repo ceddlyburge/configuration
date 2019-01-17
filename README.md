@@ -2,11 +2,11 @@
 
 A C# library for strongly typed Configuration with validation
 
-[![Build status](https://ci.appveyor.com/api/projects/status/oujy1v19iwdba8e5?svg=true)](https://ci.appveyor.com/project/ceddlyburge/configuration)
+[![Build status](https://ci.appveyor.com/api/projects/status/gonvdsbebdla0sxo?svg=true)](https://ci.appveyor.com/project/ceddlyburge/configuration)
 
-[![Quality Gate](https://sonarcloud.io/api/badges/gate?key=res.configuration)](https://sonarcloud.io/dashboard?id=res.configuration)
+[![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=ceddlyburge_configuration)](https://sonarcloud.io/dashboard?id=ceddlyburge_configuration)
 
-[![codecov](https://codecov.io/gh/resgroup/configuration/branch/master/graph/badge.svg)](https://codecov.io/gh/resgroup/configuration)
+[![codecov](https://codecov.io/gh/ceddlyburge/configuration/branch/master/graph/badge.svg)](https://codecov.io/gh/ceddlyburge/configuration)
 
 Example Usage (`Configuration` is the class provided by this repo)
 
