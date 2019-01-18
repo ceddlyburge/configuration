@@ -15,7 +15,7 @@ build_script:
  - msbuild RES.Configuration.sln /nowarn:1125 /verbosity:quiet # I think SonarQube only analyses the last msbuild output if there are multiple
  # test and create coverage report, this is used by SonarQube so must do it here
  - OpenCover.Console.exe -register:user -target:"nunit3-console.exe" -targetargs:"BuiltDlls\Debug\RES.Configuration.Test.dll" -output:"coverage.xml" -returntargetcode
- - SonarQube.Scanner.MSBuild.exe end /d:sonar.login=$env:sonarqube_token
+ - SonarQube.Scanner.MSBuild.exe end /d:sonar.login="$env:sonarqube_token"
  - msbuild RES.Configuration\RES.Configuration.csproj /t:pack /p:IncludeSymbols=true /nowarn:1125 /verbosity:quiet
 
 test_script:
