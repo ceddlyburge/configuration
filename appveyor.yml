@@ -2,7 +2,8 @@ image: Visual Studio 2017
 environment:
  github_token:
   secure: mNjJVxRBAmSq7216RlrUBH8dk9a7vMSOIYcHu2Gy4hDJd3j7kFoLpZf48mgNAF5B
- sonarqube_token: 0MsXuoTI0KBmRhi4DCr2WisIi5HS78kw4l3OP4ro1iBj9AYlGrQRtsLwuU7hMzPP
+ sonarqube_token: 
+  secure: 0MsXuoTI0KBmRhi4DCr2WisIi5HS78kw4l3OP4ro1iBj9AYlGrQRtsLwuU7hMzPP
 build_script:
  # install sonarqube runner
  - choco install "msbuild-sonarqube-runner" -y 
