@@ -13,9 +13,9 @@ build_script:
  - ps: if ($env:APPVEYOR_PULL_REQUEST_NUMBER) { SonarQube.Scanner.MSBuild.exe begin /k:"ceddlyburge_configuration"  /d:"sonar.host.url=https://sonarcloud.io" /d:"sonar.organization=ceddlyburge-github" /d:"sonar.login=f3517fea245e7c8ae57b46ff2ad9895dd4906a35" /d:sonar.verbose=false /d:"sonar.analysis.mode=preview" /d:"sonar.github.pullRequest=$env:APPVEYOR_PULL_REQUEST_NUMBER" /d:"sonar.github.repository=resgroup/configuration" /d:"sonar.github.oauth=$env:github_token" /d:sonar.cs.opencover.it.reportsPaths=coverage.xml }
  - ps: if (-Not $env:APPVEYOR_PULL_REQUEST_NUMBER) { SonarQube.Scanner.MSBuild.exe begin /k:"ceddlyburge_configuration"  /d:"sonar.host.url=https://sonarcloud.io" /d:"sonar.organization=ceddlyburge-github    " /d:"sonar.login=f3517fea245e7c8ae57b46ff2ad9895dd4906a35" /d:sonar.verbose=false /d:sonar.cs.opencover.it.reportsPaths=coverage.xml }
  #- SonarQube.Scanner.MSBuild.exe begin /k:"res.configuration"  /d:"sonar.host.url=https://sonarcloud.io" /d:"sonar.organization=res" /d:"sonar.login=f3517fea245e7c8ae57b46ff2ad9895dd4906a35" /d:sonar.verbose=false
- - msbuild RES.Configuration\RES.Configuration.csproj /t:pack /p:IncludeSymbols=true /nowarn:1125 /verbosity:quiet
- - msbuild RES.Configuration.Test\RES.Configuration.Test.csproj  /nowarn:1125 /verbosity:quiet
+ - msbuild RES.Configuration.sln /nowarn:1125 /verbosity:quiet # I think SonarQube only analyses the last msbuild output if there are multiple
  - SonarQube.Scanner.MSBuild.exe end /d:"sonar.login=f3517fea245e7c8ae57b46ff2ad9895dd4906a35"
+ - msbuild RES.Configuration\RES.Configuration.csproj /t:pack /p:IncludeSymbols=true /nowarn:1125 /verbosity:quiet
 
 test_script:
  # test and create coverage report.
